@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -e
+
+FILEDIR=$HOME/.idid
+TODAY=$(date +"%Y-%m-%d")
+TODAYS_FILE=$FILEDIR/today-$TODAY.txt
+
+info() {
+  echo ">> $@"
+}
+
+usage() {
+  echo "$0 \"thing you did today\""
+}
+
+paste() {
+  echo "$@" | LC_CTYPE=UTF-8 pbcopy
+}
+
+setup() {
+  if [ ! -d "${FILEDIR}" ]; then
+    mkdir -p $FILEDIR
+  fi
+
+  if [ ! -f "${TODAYS_FILE}" ]; then
+    touch ${TODAYS_FILE}
+  fi
+}
+
+did_a_thing() {
+  setup
+  echo $@ >> ${TODAYS_FILE}
+  echo "Yeah you did!"
+}
+
+did_today() 
+{
+  STUFF=$(awk -v ORS=', ' '{print}' ${TODAYS_FILE} | sed 's/, $//') 
+  info $STUFF
+  paste $STUFF
+}
+
+if [ -z "$1" ]; then
+  usage
+  exit 1
+elif [ "$1" == "did" ]; then
+  did_today
+else
+  did_a_thing $1
+fi
+
