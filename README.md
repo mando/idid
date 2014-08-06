@@ -50,7 +50,7 @@ Now you've got a list of everything you did, all comma-separated just like you l
     $ pbcopy
     totes wrote this cool thing!, deployed all my shiz
     
-That's write - it's all up in your pasteboard (sorry, OS X only).
+That's right - it's all up in your pasteboard (sorry, OS X only).
 
 ## Why?
 
