@@ -34,9 +34,9 @@ did_a_thing() {
   echo "Yeah you did!"
 }
 
-did_today() 
+did_today()
 {
-  STUFF=$(awk -v ORS=', ' '{print}' ${TODAYS_FILE} | sed 's/, $//') 
+  STUFF=$(awk -v ORS=', ' '{print}' ${TODAYS_FILE} | sed 's/, $//')
   info $STUFF
   paste $STUFF
 }
